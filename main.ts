@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const ENTRY_LINE: string =
-  "Taught Dad to spot scams all week until he reported my $14 Venmo to the FBI.";
+  "Saved $85 grooming my poodle Monday; all week strangers thanked me for rescuing him.";
 
 function validateLine(line: string): string {
   const chars = Array.from(line).length;
