@@ -2,10 +2,11 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const ENTRY_LINE: string =
-  "Listed my couch for $200 Monday; by Friday I paid a man named Keith $40 and helped him load it.";
+  "Taught Dad to spot scams all week until he reported my $14 Venmo to the FBI.";
 
 function validateLine(line: string): string {
   const chars = Array.from(line).length;
+  const bytes = Buffer.byteLength(line, "utf8");
   if (chars < 1 || chars > 100) {
     throw new Error(`Invalid character count: ${chars}`);
   }
@@ -14,6 +15,9 @@ function validateLine(line: string): string {
   }
   if (line.trim().length === 0) {
     throw new Error("Entry must not be only whitespace");
+  }
+  if (!/^[\x20-\x7e]+$/.test(line) || bytes !== chars) {
+    throw new Error(`Expected pure ASCII single-byte UTF-8, got ${bytes}B / ${chars}c`);
   }
   return line;
 }
